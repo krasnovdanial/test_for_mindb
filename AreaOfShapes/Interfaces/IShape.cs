@@ -8,6 +8,7 @@ namespace AreaOfShapes.Interfaces
 {
     public interface IShape
     {
-        double Area { get; }
-    }
+		double Area { get; }
+		string Type { get; }
+	}
 }

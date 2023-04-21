@@ -6,31 +6,34 @@ using System.Threading.Tasks;
 
 namespace AreaOfShapes.Shapes
 {
-    public class Circle : Interfaces.IShape
-    {
-        public double Radius { get; private set; }
-        internal Circle GetCircle(double[] parameters)
-        {
-            if (parameters == null || parameters.Length != 1)
-            {
-                throw new ArgumentException("Parameters are incorrect: a circle must have radius.", "parameters");
-            }
-            return new Circle(parameters[0]);
-        }
-        public double Area =>  Math.PI*Math.Pow(Radius, 2);
+	public class Circle : Interfaces.IShape
+	{
+		private readonly double radius;
 
-        public Circle()
-        {
-            Radius = default(int);
-        }
-        public Circle(double radius)
-        {
-            if (radius < 0)
-            {
-                throw new ArgumentException("Please, enter only positive values.");
-            }
-            Radius = radius;  
-        }
-       
-    }
+		public double Radius => radius;
+
+		public double Area => Math.PI * Math.Pow(Radius, 2);
+
+		public string Type => "Circle";
+
+		public Circle(double radius)
+		{
+			if (radius <= 0)
+			{
+				throw new ArgumentException("Radius must be a positive value.", nameof(radius));
+			}
+
+			this.radius = radius;
+		}
+
+		public static Circle Create(double[] parameters)
+		{
+			if (parameters == null || parameters.Length != 1 || parameters[0] <= 0)
+			{
+				throw new ArgumentException("Circle can only be created with one positive radius parameter.", nameof(parameters));
+			}
+
+			return new Circle(parameters[0]);
+		}
+	}
 }

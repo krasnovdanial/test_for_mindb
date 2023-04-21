@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace AreaOfShapes.Shapes
 {
-    /// <summary>Вычисление площади фигуры без знания типа фигуры
-    /// </summary>
-    public class Shape: IShape
-    {
-        private Interfaces.IShape shape;
-        public double Area => shape.Area;
+	public class Shape : IShape
+	{
+		private readonly IShape shape;
 
-        public Shape(Interfaces.IShape figure)
-        {
-            shape = figure;
-        }
-    }
+		public double Area => shape.Area;
+		public string Type => shape.Type;
+
+		public Shape(IShape figure)
+		{
+			shape = figure;
+		}
+	}
 }
